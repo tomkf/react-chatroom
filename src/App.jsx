@@ -9,7 +9,6 @@ class App extends Component {
       currentUser: {name: "Anonymous"},
       messages: [],
       numusers: 0,
-      //key: uuidv4(); --- this did nothing to solve error message
     };
   }
   sendMessage = newMessage => {
