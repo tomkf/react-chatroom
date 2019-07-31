@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>server.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../";
+    var thisFile = "server/server.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>server.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">"express"</span>);
+<span class="hljs-keyword">const</span> SocketServer = <span class="hljs-built_in">require</span>(<span class="hljs-string">"ws"</span>).Server;
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<p>const uuidv4 = require('uuid/v4');</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-keyword">const</span> mysql = <span class="hljs-built_in">require</span>(<span class="hljs-string">"mysql"</span>);
+
+<span class="hljs-keyword">const</span> newDb = <span class="hljs-string">"nodemysql"</span>;
+
+<span class="hljs-keyword">const</span> db = mysql.createConnection({
+  <span class="hljs-attr">host</span>: <span class="hljs-string">"localhost"</span>,
+  <span class="hljs-attr">user</span>: <span class="hljs-string">"root"</span>,
+  <span class="hljs-attr">password</span>: <span class="hljs-string">"password1"</span>,
+  <span class="hljs-attr">insecureAuth</span>: <span class="hljs-literal">true</span>
+});
+
+db.connect(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+  <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"CONNECTED!"</span>);
+});
+
+<span class="hljs-keyword">const</span> PORT = <span class="hljs-comment">/*process.env.port ||*/</span> <span class="hljs-number">3001</span>;
+<span class="hljs-keyword">const</span> app = express();
+
+<span class="hljs-keyword">const</span> table =
+  <span class="hljs-string">"CREATE TABLE IF NOT EXISTS posts(id int AUTO_INCREMENT, name VARCHAR(30), email VARCHAR(50), content VARCHAR(500), stamp VARCHAR(40), PRIMARY KEY(id))"</span>;
+
+db.query(<span class="hljs-string">"CREATE DATABASE IF NOT EXISTS ??"</span>, newDb, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, results</span>) </span>{
+  <span class="hljs-keyword">if</span> (err) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"error in creating database"</span>, err);
+    <span class="hljs-keyword">return</span>;
+  }
+
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"created a new database"</span>);
+
+  db.changeUser(
+    {
+      <span class="hljs-attr">database</span>: newDb
+    },
+    <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+      <span class="hljs-keyword">if</span> (err) {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"error in changing database"</span>, err);
+        <span class="hljs-keyword">return</span>;
+      }
+
+      db.query(table, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+        <span class="hljs-keyword">if</span> (err) {
+          <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"error in creating tables"</span>, err);
+          <span class="hljs-keyword">return</span>;
+        }
+
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"created a new table"</span>);
+      });
+    }
+  );
+});
+
+<span class="hljs-keyword">let</span> allowCrossDomain = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res, next</span>) </span>{
+  res.header(<span class="hljs-string">"Access-Control-Allow-Origin"</span>, <span class="hljs-string">"*"</span>);
+  res.header(<span class="hljs-string">"Access-Control-Allow-Headers"</span>, <span class="hljs-string">"*"</span>);
+  next();
+};
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<p>// create table
+app.get(&quot;/createpoststable&quot;, (req, res) =&gt; {
+let sql =
+&quot;CREATE TABLE posts(id int AUTO_INCREMENT, name VARCHAR(30), email VARCHAR(50), content VARCHAR(500), stamp VARCHAR(40), PRIMARY KEY(id))&quot;;
+db.query(sql, (err, result) =&gt; {
+if (err) throw err;
+console.log(result);
+res.send(&quot;Posts table created...&quot;);
+});
+});</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<p>//  Insert post 1
+app.get(&quot;/addpost1&quot;, (req, res) =&gt; {
+let pname = &quot;Joe Blogs&quot;;
+let pemail = &quot;jblogs@gmail.com&quot;;
+let pcontent =
+&quot;Interesting post Phil. It's great to see that a blog really can come alive when the comments update in real-time. The commenting system becomes a conversation platform.&quot;;
+let pstamp = &quot;July 30 2019&quot;;
+let sql = <code>INSERT INTO posts (name, email, content, stamp) VALUES (${pname}, ${pemail}, ${pcontent}, ${pstamp})</code>;
+let query = db.query(sql, (err, result) =&gt; {
+if (err) throw err;
+console.log(result);
+res.send(&quot;Post 1 added...&quot;);
+});
+});</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<p>// Insert post 2
+app.get(&quot;/addpost2&quot;, (req, res) =&gt; {
+let post = {
+name: &quot;Phil Leggetter&quot;,
+email: &quot;leggeter1981@shaw.ca&quot;,
+content:
+&quot;Thanks Joe (great name by the way). I'm pleased you see the benefits of adding realtime functionality to a commenting system. It really can draw users in and turn a standard blogpost into a place where conversation takes place. Old style commenting is still great, but real-time comments are really engaging and can make a page much more sticky and engaging.&quot;,
+stamp: &quot;July 30 2019&quot;
+};
+let sql = &quot;INSERT INTO posts SET ?&quot;;
+let query = db.query(sql, post, (err, result) =&gt; {
+if (err) throw err;
+console.log(result);
+res.send(&quot;Post 2 added...&quot;);
+});
+});</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6"></a>
+</div>
+<p>// Insert post 3
+app.get(&quot;/addpost3&quot;, (req, res) =&gt; {
+let post = {
+name: &quot;Max Williams&quot;,
+email: &quot;maxWill@gmail.com&quot;,
+content: &quot;Phil - great post. Keep up the good work.&quot;,
+stamp: &quot;July 30 2019&quot;
+};
+let sql = &quot;INSERT INTO posts SET ?&quot;;
+let query = db.query(sql, post, (err, result) =&gt; {
+if (err) throw err;
+console.log(result);
+res.send(&quot;Post 3 added...&quot;);
+});
+});</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7"></a>
+</div>
+<p>app.get(&quot;/api/getposts&quot;, (req, res) =&gt; {
+let sql = &quot;SELECT * FROM posts&quot;;
+let query = db.query(sql, (err, results) =&gt; {
+// if (err) throw err;
+// console.log(results);
+// res.send(&quot;Posts fetched...&quot;);
+if (err) throw err;
+res.end(JSON.stringify(results));
+});
+});</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8"></a>
+</div>
+<p>this is where I integrate mySQL</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+app.get(<span class="hljs-string">"/api/messages"</span>, (req, res) =&gt; {
+  <span class="hljs-keyword">const</span> dbMessages = [
+    {
+      <span class="hljs-attr">name</span>: <span class="hljs-string">"Joe Blogs"</span>,
+      <span class="hljs-attr">email</span>: <span class="hljs-string">"jblogs@gmail.com"</span>,
+      <span class="hljs-attr">content</span>:
+        <span class="hljs-string">"Interesting post Phil. It's great to see that a blog really can come alive when the comments update in real-time. The commenting system becomes a conversation platform."</span>,
+      <span class="hljs-attr">stamp</span>: <span class="hljs-string">"July 30 2019"</span>
+    },
+    {
+      <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>,
+      <span class="hljs-attr">name</span>: <span class="hljs-string">"Phil Leggetter"</span>,
+      <span class="hljs-attr">email</span>: <span class="hljs-string">"leggeter1981@shaw.ca"</span>,
+      <span class="hljs-attr">content</span>:
+        <span class="hljs-string">"Thanks Joe (great name by the way). I'm pleased you see the benefits of adding realtime functionality to a commenting system. It really can draw users in and turn a standard blogpost into a place where conversation takes place. Old style commenting is still great, but real-time comments are really engaging and can make a page much more sticky and engaging."</span>,
+      <span class="hljs-attr">stamp</span>: <span class="hljs-string">"July 30 2019"</span>
+    },
+    {
+      <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-attr">name</span>: <span class="hljs-string">"Max Williams"</span>,
+      <span class="hljs-attr">email</span>: <span class="hljs-string">"maxWill@gmail.com"</span>,
+      <span class="hljs-attr">content</span>: <span class="hljs-string">"Phil - great post. Keep up the good work."</span>,
+      <span class="hljs-attr">stamp</span>: <span class="hljs-string">"July 30 2019"</span>
+    }
+  ];
+
+  res.json(dbMessages);
+});
+
+<span class="hljs-keyword">const</span> server = app.listen(PORT, () =&gt; {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`WebSocket Server Running on Port: <span class="hljs-subst">${PORT}</span>`</span>);
+});
+<span class="hljs-keyword">const</span> wss = <span class="hljs-keyword">new</span> SocketServer({ server });
+wss.broadcast = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">broadcast</span>(<span class="hljs-params">data</span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"broadcasting"</span>);
+  wss.clients.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">each</span>(<span class="hljs-params">client</span>) </span>{
+    client.send(data);
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9"></a>
+</div>
+<p>for every client send full object data</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">  });
+};
+<span class="hljs-keyword">const</span> sendConnectedClients = <span class="hljs-function"><span class="hljs-params">numclients</span> =&gt;</span> {
+  <span class="hljs-keyword">const</span> clientsconnected = {
+    <span class="hljs-attr">numcon</span>: numclients,
+    <span class="hljs-attr">type</span>: <span class="hljs-string">"numclients"</span>
+  };
+  <span class="hljs-built_in">console</span>.log(clientsconnected);
+  wss.broadcast(<span class="hljs-built_in">JSON</span>.stringify(clientsconnected));
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-10" id="section-10"></a>
+</div>
+<p>everything sent by the client was put in an object via json.parse - and to send back the data it must be converted to a string -- which was then rendered</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">};
+wss.on(<span class="hljs-string">"connection"</span>, ws =&gt; {
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-11" id="section-11"></a>
+</div>
+<p>wss.clients.size auto gathers the number of connected users. to function needs to be created for this. this number could then be sent back to the client to render in header</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">  <span class="hljs-keyword">let</span> numconnected = wss.clients.size;
+  sendConnectedClients(numconnected);
+  ws.on(<span class="hljs-string">"message"</span>, message =&gt; {
+    <span class="hljs-keyword">const</span> clientMessage = <span class="hljs-built_in">JSON</span>.parse(message);
+    <span class="hljs-keyword">switch</span> (clientMessage.type) {
+      <span class="hljs-keyword">case</span> <span class="hljs-string">"incomingMessage"</span>:
+        clientMessage.type = <span class="hljs-string">"postMessage"</span>; <span class="hljs-comment">//this overwrites the 'type' sent by user and sends back a new type for the client to read/parse</span>
+        wss.broadcast(<span class="hljs-built_in">JSON</span>.stringify(clientMessage));
+        <span class="hljs-keyword">break</span>;
+      <span class="hljs-keyword">case</span> <span class="hljs-string">"postNotification"</span>:
+        clientMessage.type = <span class="hljs-string">"incomingNotification"</span>;
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-12" id="section-12"></a>
+</div>
+<p>clientMessage.key = uuidv4(); //here did nothing to get rid of error</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">        clientMessage.content = <span class="hljs-string">`<span class="hljs-subst">${
+          clientMessage.oldname
+        }</span> changed their name to <span class="hljs-subst">${clientMessage.newname}</span> `</span>;
+        wss.broadcast(<span class="hljs-built_in">JSON</span>.stringify(clientMessage));
+        <span class="hljs-keyword">break</span>;
+      <span class="hljs-keyword">default</span>:
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"no known type"</span>);
+    }
+  });
+  ws.on(<span class="hljs-string">"close"</span>, () =&gt; <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Client disconnected"</span>));
+});
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

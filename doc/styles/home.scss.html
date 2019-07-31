@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>home.scss</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../";
+    var thisFile = "styles/home.scss";
+    var defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>home.scss</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="scss"><span class="hljs-selector-tag">h1</span> {
+  <span class="hljs-attribute">color</span>: black;
+}
+
+
+<span class="hljs-selector-tag">a</span>{
+  <span class="hljs-attribute">color</span>: red;
+}
+
+  <span class="hljs-selector-tag">body</span> {
+    <span class="hljs-attribute">background</span>: <span class="hljs-number">#f6ecec</span>;
+    <span class="hljs-attribute">color</span>: rgb(<span class="hljs-number">60</span>, <span class="hljs-number">60</span>, <span class="hljs-number">60</span>);
+    <span class="hljs-attribute">font-family</span>: <span class="hljs-string">'Open Sans'</span>, sans-serif;
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">70px</span> <span class="hljs-number">0</span>;
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;
+    <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">500</span>;
+  }
+
+<span class="hljs-selector-class">.chat-bar</span>{
+  <span class="hljs-attribute">align-items</span>: center;
+}
+
+
+  <span class="hljs-selector-class">.chatbar-message</span>,
+  <span class="hljs-selector-class">.chatbar-username</span> {
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<p>border: 1px solid rgb(60, 60, 60);</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="scss">    <span class="hljs-attribute">display</span>: block;
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">40px</span>;
+    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">40px</span>;
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">5px</span>;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">9px</span>;
+  }
+
+  <span class="hljs-selector-class">.chatbar-message</span> {
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<p>width: 400px;</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="scss">    <span class="hljs-attribute">float</span>: left;
+    <span class="hljs-attribute">flex</span>: <span class="hljs-number">8</span>;
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<p>justify-content: flex-start;</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="scss">  }
+
+  <span class="hljs-selector-class">.chatbar-username</span> {
+    <span class="hljs-attribute">flex</span>: <span class="hljs-number">2</span>;
+  }
+
+  <span class="hljs-selector-class">.message-grey</span> {
+    <span class="hljs-attribute">background</span>: <span class="hljs-number">#f6ecec</span>;
+    <span class="hljs-attribute">display</span>: flex;
+    <span class="hljs-attribute">padding-top</span>: <span class="hljs-number">8px</span>;
+    <span class="hljs-attribute">padding-left</span>: <span class="hljs-number">10PX</span>;
+    <span class="hljs-attribute">padding-bottom</span>: <span class="hljs-number">28px</span>;
+  }
+
+  <span class="hljs-selector-class">.message-gey</span><span class="hljs-selector-class">.system</span> {
+    <span class="hljs-attribute">font-style</span>: italic;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">5px</span> <span class="hljs-number">20px</span>;
+  }
+
+  <span class="hljs-selector-class">.message-grey</span>:nth-of-type(2n) {
+    <span class="hljs-attribute">background</span>: white;
+  }
+
+
+
+  <span class="hljs-selector-class">.message-content</span>,
+  <span class="hljs-selector-class">.message-username</span> {
+    <span class="hljs-attribute">overflow</span>: hidden;
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">5px</span>;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">10px</span>;
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">16px</span>;
+  }
+
+  <span class="hljs-selector-class">.message-content</span> {
+    <span class="hljs-attribute">flex</span>: <span class="hljs-number">8</span>;
+  }
+
+  <span class="hljs-selector-class">.message-username</span> {
+    <span class="hljs-attribute">flex</span>: <span class="hljs-number">2</span>;
+    <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">700</span>;
+    <span class="hljs-attribute">padding-left</span>: <span class="hljs-number">0px</span>;
+  }
+
+
+  <span class="hljs-selector-class">.message-content</span>{
+    <span class="hljs-attribute">padding-left</span>: <span class="hljs-number">52px</span>;
+  }
+  
+  <span class="hljs-selector-class">.counter</span> {
+    <span class="hljs-attribute">color</span>: white;
+    <span class="hljs-attribute">float</span>:right;
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">18px</span>;
+    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">60px</span>;
+  }
+
+  <span class="hljs-selector-class">.notification-content</span> {
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">30%</span>;
+  }
+
+   <span class="hljs-selector-class">.content-box</span> {
+<span class="hljs-attribute">background</span>: white;
+<span class="hljs-attribute">margin</span>: auto;
+<span class="hljs-attribute">padding</span>: <span class="hljs-number">2%</span>;
+<span class="hljs-attribute">width</span>: <span class="hljs-number">78%</span>;
+<span class="hljs-attribute">height</span>: <span class="hljs-number">88%</span>;
+<span class="hljs-attribute">border-radius</span>: <span class="hljs-number">10px</span>;
+<span class="hljs-attribute">margin-top</span>: -<span class="hljs-number">58px</span>;
+ }
+ 
+<span class="hljs-selector-class">.submit-button</span> {
+  <span class="hljs-attribute">margin-top</span>: -<span class="hljs-number">9px</span>;
+  <span class="hljs-attribute">background</span>: <span class="hljs-number">#ce2929</span>;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">31px</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">9px</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">172px</span>;
+  <span class="hljs-attribute">text-shadow</span>: -<span class="hljs-number">1px</span> <span class="hljs-number">0</span> black, <span class="hljs-number">0</span> <span class="hljs-number">1px</span> black, <span class="hljs-number">1px</span> <span class="hljs-number">0</span> black, <span class="hljs-number">0</span> -<span class="hljs-number">1px</span> black;
+}
+
+<span class="hljs-selector-tag">h4</span>{
+  <span class="hljs-attribute">font-weight</span>: light;
+}
+<span class="hljs-selector-tag">form</span> {
+  <span class="hljs-attribute">position</span>: relative;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">450px</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">24px</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">10px</span>;
+  
+}
+
+<span class="hljs-selector-tag">input</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">display</span>: block;
+  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#999</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">15px</span>;
+  <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">6px</span>;
+  <span class="hljs-attribute">font-weight</span>: light;
+
+}
+
+<span class="hljs-selector-tag">textarea</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">150px</span>;
+  <span class="hljs-attribute">display</span>: block;
+}
+
+<span class="hljs-selector-tag">small</span>{
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5"></a>
+</div>
+<p>position: absolute;</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="scss">  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">80%</span>;
+  <span class="hljs-attribute">top</span>: -<span class="hljs-number">2px</span>;
+  <span class="hljs-attribute">padding-left</span>: <span class="hljs-number">4px</span>;
+}
+
+<span class="hljs-selector-id">#toolTip</span>{
+  <span class="hljs-attribute">position</span>: absolute;
+  <span class="hljs-attribute">margin-left</span>: <span class="hljs-number">2px</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">12px</span>;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#272020</span>;
+  <span class="hljs-attribute">color</span>: white;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">15px</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">127px</span>;
+  <span class="hljs-attribute">padding-top</span>: <span class="hljs-number">6px</span>;
+  <span class="hljs-attribute">padding-bottom</span>: <span class="hljs-number">15px</span>;
+  <span class="hljs-attribute">padding-left</span>: <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">padding-right</span>: <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0.9</span>;
+  <span class="hljs-attribute">text-shadow</span>: -<span class="hljs-number">1px</span> <span class="hljs-number">1px</span> <span class="hljs-number">17px</span>;
+  <span class="hljs-attribute">z-index</span>: <span class="hljs-number">22</span>;}
+
+<span class="hljs-selector-id">#test</span>{       
+  <span class="hljs-attribute">position</span>: absolute;
+  <span class="hljs-attribute">margin-left</span>: <span class="hljs-number">2px</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">12px</span>;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#272020</span>;
+  <span class="hljs-attribute">color</span>: white;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">15px</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">5px</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">127px</span>;
+  <span class="hljs-attribute">padding-top</span>: <span class="hljs-number">6px</span>;
+  <span class="hljs-attribute">padding-bottom</span>: <span class="hljs-number">15px</span>;
+  <span class="hljs-attribute">padding-left</span>: <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">padding-right</span>: <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0.9</span>;
+  <span class="hljs-attribute">text-shadow</span>: -<span class="hljs-number">1px</span> <span class="hljs-number">1px</span> <span class="hljs-number">17px</span>;
+  <span class="hljs-attribute">z-index</span>: <span class="hljs-number">22</span>;
+}
+
+
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

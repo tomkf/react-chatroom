@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>demo_db_connection.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "";
+    var thisFile = "demo_db_connection.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+      <div class="heading h1">
+        <a href="#create-app-directory">Create app directory</a>
+      </div>
+
+      <div class="heading h1">
+        <a href="#install-app-dependencies">Install app dependencies</a>
+      </div>
+
+      <div class="heading h1">
+        <a href="#a-wildcard-is-used-to-ensure-both-package.json-and-package-lock.json-are-copied">A wildcard is used to ensure both package.json AND package-lock.json are copied</a>
+      </div>
+
+      <div class="heading h1">
+        <a href="#where-available-npm@5+">where available (npm@5+)</a>
+      </div>
+
+      <div class="heading h1">
+        <a href="#if-you-are-building-your-code-for-production">If you are building your code for production</a>
+      </div>
+
+      <div class="heading h1">
+        <a href="#run-npm-ci-onlyproduction">RUN npm ci --only=production</a>
+      </div>
+
+      <div class="heading h1">
+        <a href="#bundle-app-source">Bundle app source</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>demo_db_connection.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+<p>alias:
+alias mysql=/usr/local/mysql/bin/mysql
+alias mysqladmin=/usr/local/mysql/bin/mysqladmin
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 13
+Server version: 8.0.17-commercial MySQL Enterprise Server - Commercial</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+<span class="hljs-keyword">var</span> mysql = <span class="hljs-built_in">require</span>(<span class="hljs-string">"mysql"</span>);
+
+<span class="hljs-keyword">var</span> con = mysql.createConnection({
+  <span class="hljs-attr">host</span>: <span class="hljs-string">"localhost"</span>,
+  <span class="hljs-attr">user</span>: <span class="hljs-string">"root"</span>,
+  <span class="hljs-attr">password</span>: <span class="hljs-string">"password1"</span>,
+  <span class="hljs-attr">insecureAuth</span>: <span class="hljs-literal">true</span>
+});
+
+con.connect(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+  <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Connected!"</span>);
+});
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<p>DOCKER notes:</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<p>FROM node:10</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap" id="create-app-directory">
+  <h1>
+    <a href="#create-app-directory" name="create-app-directory" class="pilcrow"></a>
+Create app directory
+  </h1>
+</div>
+<p>WORKDIR /usr/src/app</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap" id="install-app-dependencies">
+  <h1>
+    <a href="#install-app-dependencies" name="install-app-dependencies" class="pilcrow"></a>
+Install app dependencies
+  </h1>
+</div>
+<div class="pilwrap" id="a-wildcard-is-used-to-ensure-both-package.json-and-package-lock.json-are-copied">
+  <h1>
+    <a href="#a-wildcard-is-used-to-ensure-both-package.json-and-package-lock.json-are-copied" name="a-wildcard-is-used-to-ensure-both-package.json-and-package-lock.json-are-copied" class="pilcrow"></a>
+A wildcard is used to ensure both package.json AND package-lock.json are copied
+  </h1>
+</div>
+<div class="pilwrap" id="where-available-npm@5+">
+  <h1>
+    <a href="#where-available-npm@5+" name="where-available-npm@5+" class="pilcrow"></a>
+where available (npm@5+)
+  </h1>
+</div>
+<p>COPY package*.json ./</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <p>RUN npm install</p>
+<div class="pilwrap" id="if-you-are-building-your-code-for-production">
+  <h1>
+    <a href="#if-you-are-building-your-code-for-production" name="if-you-are-building-your-code-for-production" class="pilcrow"></a>
+If you are building your code for production
+  </h1>
+</div>
+<div class="pilwrap" id="run-npm-ci-onlyproduction">
+  <h1>
+    <a href="#run-npm-ci-onlyproduction" name="run-npm-ci-onlyproduction" class="pilcrow"></a>
+RUN npm ci --only=production
+  </h1>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap" id="bundle-app-source">
+  <h1>
+    <a href="#bundle-app-source" name="bundle-app-source" class="pilcrow"></a>
+Bundle app source
+  </h1>
+</div>
+<p>COPY . .</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8"></a>
+</div>
+<p>EXPOSE 8080
+CMD [ &quot;node&quot;, &quot;server.js&quot; ]</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9"></a>
+</div>
+<p>You will also want a .dockerignore file
+with:
+node_modules
+npm-debug.log</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-10" id="section-10"></a>
+</div>
+<p>//////////////////////////////////////////////////////////////////////////</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-11" id="section-11"></a>
+</div>
+<p>const mysql = require(&quot;mysql&quot;);
+const connection = mysql.createConnection({
+host: &quot;127.0.0.1&quot;,
+user: &quot;user&quot;,
+password: &quot;willSQL1&quot;,
+database: &quot;database name&quot;
+});
+connection.connect(err =&gt; {
+if (err) throw err;
+console.log(&quot;Connected!&quot;);
+});</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>
