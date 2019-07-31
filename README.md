@@ -17,7 +17,11 @@ type in http://localhost:3000 on the browser
 
 
 
+### Docker Containers
 
+To build & run in Docker containers:
+
+docker-compose build && docker-compose up
 
 
 
