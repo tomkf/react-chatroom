@@ -1,6 +1,6 @@
 ### Usage
  Install the dependencies in both the root folder and again in the server directory.
-Start websocket server start app server. Use these commands:
+Start websocket server, start app server. Use these commands:
 
 ```
 npm install
