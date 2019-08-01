@@ -6,7 +6,7 @@ Start websocket server start app server. Use these commands:
 npm install
 
 cd server
-npm install (server side dependencies)
+npm install
 npm start
 ```
 
@@ -32,9 +32,6 @@ docker-compose build && docker-compose up
 <br>
 <br>
 <br>
-<br>
-<br>
-
 
 ### React Boilerplate
 
